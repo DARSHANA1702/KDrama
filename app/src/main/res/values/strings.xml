@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">KDrama</string>
+    <string name="sign_in_error">Sign-in error</string>
+    <string name="sign_in_successful">Sign-in successful</string>
+    <string name="token_expired">Token expired</string>
+
+    <integer name="com_vk_sdk_AppId">7184016</integer>
+
+    <string name="loading_error">Loading error</string>
+    <string name="success">Success</string>
+</resources>

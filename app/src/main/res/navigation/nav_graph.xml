@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="heckfyxe.kdrama.ui.start.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_albumsFragment"
+            app:destination="@id/albumsFragment"
+            app:popUpTo="@+id/nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:name="heckfyxe.kdrama.ui.albums.AlbumsFragment"
+        android:label="fragment_albums"
+        tools:layout="@layout/fragment_albums" >
+        <action
+            android:id="@+id/action_albumsFragment_to_videosFragment"
+            app:destination="@id/videosFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_startFragment" app:destination="@id/startFragment" />
+    <fragment
+        android:id="@+id/videosFragment"
+        android:name="heckfyxe.kdrama.ui.videos.VideosFragment"
+        android:label="fragment_videos"
+        tools:layout="@layout/fragment_videos" >
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
+        <argument
+            android:name="albumTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_videosFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:name="heckfyxe.kdrama.ui.videos.VideoPlayerFragment"
+        android:label="VideoPlayerFragment"
+        tools:layout="@layout/fragment_video_player">
+        <argument
+            android:name="videoLink"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -11,16 +11,28 @@ class MainActivity : AppCompatActivity() {
 
     private val tokenTracker = object: VKTokenExpiredHandler {
         override fun onTokenExpired() {
-            findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_startFragment)
-            toast(R.string.token_expired)
+            if (isOnCreateCompleted) {
+                navigateToStartActivity()
+            } else {
+                isTokenExpired = true
+            }
         }
     }
+
+    private var isTokenExpired = false
+    private var isOnCreateCompleted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        VK.removeTokenExpiredHandler(tokenTracker)
+        if (isTokenExpired) {
+            navigateToStartActivity()
+            return
+        }
+
+        isOnCreateCompleted = true
+
         VK.addTokenExpiredHandler(tokenTracker)
     }
 
@@ -28,5 +40,10 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
 
         VK.removeTokenExpiredHandler(tokenTracker)
+    }
+
+    private fun navigateToStartActivity() {
+        findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_startFragment)
+        toast(R.string.token_expired)
     }
 }

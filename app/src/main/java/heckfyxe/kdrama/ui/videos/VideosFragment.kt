@@ -57,7 +57,6 @@ class VideosFragment : Fragment() {
             videosList.adapter = adapter
 
             (activity as AppCompatActivity).setSupportActionBar(toolbar)
-            albumTitle = args.albumTitle
             executePendingBindings()
         }
         return binding.root
@@ -83,5 +82,11 @@ class VideosFragment : Fragment() {
         viewModel.errors.observe(this, Observer {
             Log.e("VideosFragment", "VK error", it)
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        (activity as? AppCompatActivity)?.supportActionBar?.title = args.albumTitle
     }
 }

@@ -44,17 +44,14 @@ class AlbumsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentAlbumsBinding.inflate(inflater, container, false)
-        binding.albumsRecyclerView.adapter = adapter
-        return binding.root
+    ): View? = FragmentAlbumsBinding.inflate(inflater).run {
+        albumsRecyclerView.adapter = adapter
+        root
     }
 
     private fun observeViewModel() {
         viewModel.albums.observe(this, Observer {
-            Log.i("getAlbums", it.toString())
             adapter.submitList(it)
-            toast(R.string.success)
         })
 
         viewModel.navigateToVideosFragment.observe(this, Observer { album: Album? ->
